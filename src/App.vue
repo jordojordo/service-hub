@@ -1,13 +1,12 @@
 <template>
-  <div>
-    <main class="main">
-      <router-view />
-    </main>
-  </div>
+  <MainLayout />
 </template>
 
+<script setup lang="ts">
+import MainLayout from '@/layouts/MainLayout.vue'
+</script>
+
 <style lang="scss">
-// Unscoped styles for html and body
 html {
   font-size: 10px;
   margin: 0;
@@ -24,6 +23,5 @@ body {
 
 .main {
   position: relative;
-  top: 83px;
 }
 </style>
