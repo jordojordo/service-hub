@@ -10,6 +10,7 @@
       </div>
       <div v-if="!loading">
         <SearchInput
+          data-testid="search-input"
           v-model="searchQuery"
           placeholder="Search services..."
         />
