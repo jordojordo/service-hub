@@ -1,37 +1,34 @@
 <template>
   <div class="service-catalog">
-    <h1>Service Catalog</h1>
+    <div class="service-catalog__masthead">
+      <div>
+        <h1>Service Hub</h1>
+        <p>
+          Organize services, manage and track versioning and API service documentation.&nbsp;
+          <a href="google.com" target="_blank">Learn more</a>
+        </p>
+      </div>
+      <div v-if="!loading">
+        <SearchInput
+          v-model="searchQuery"
+          placeholder="Search services..."
+        />
+      </div>
+    </div>
     <div v-if="loading">
       Loading services...
     </div>
     <div v-else>
-      <input
-        v-model="searchQuery"
-        class="search-input"
-        data-testid="search-input"
-        placeholder="Search services"
-      >
-      <ul
-        v-if="services.length"
-        class="catalog"
-      >
+      <ul v-if="filteredServices.length" class="catalog">
         <li
-          v-for="service in services"
+          v-for="service in filteredServices"
           :key="service.id"
           class="service"
         >
-          <div>
-            <p>
-              {{ service.name }}
-            </p>
-            <p>{{ service.description }}</p>
-          </div>
+          <ServiceCard :service="service" :loading="loading" />
         </li>
       </ul>
-      <div
-        v-else
-        data-testid="no-results"
-      >
+      <div v-else data-testid="no-results">
         No services
       </div>
     </div>
@@ -39,13 +36,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue';
 
-import useServices from '@/composables/useServices'
+import useServices from '@/composables/useServices';
+import ServiceCard from '@/components/ServiceCard/ServiceCard.vue';
+import SearchInput from '@/components/SearchInput.vue';
 
-const { services, loading } = useServices()
+const { services, loading } = useServices();
+const searchQuery = ref('');
 
-const searchQuery = ref('')
+const filteredServices = computed(() => {
+  if (!searchQuery.value.trim()) {
+    return services.value;
+  };
+
+  return services.value.filter(service =>
+    service.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+  );
+});
 </script>
 
 <style lang="scss" scoped>
@@ -53,33 +61,41 @@ const searchQuery = ref('')
   margin: 2rem auto;
   max-width: 1366px;
   padding: 0 20px;
+
+  &__masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+
+    h1 {
+      margin: 0;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 36px;
+      color: #3C4557;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 400;
+      color: #3C4557;
+    }
+
+    a {
+      color: #1354c6;
+    }
+  }
 }
 
 .catalog {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 40px;
   list-style: none;
-  margin: 20px 0 0 0;
+  margin: 2rem 0 0;
+  padding: 0;
 }
 
-.service {
-  border: 1px solid #999;
-  border-radius: 10px;
-  margin: 6px;
-  padding: 8px 16px;
-  width: 200px;
-
-  p:first-of-type {
-    color: #333;
-    font-weight: 700;
-  }
-
-  p {
-    color: #666;
-  }
-}
-
-input {
-  padding: 8px 4px;
-}
 </style>

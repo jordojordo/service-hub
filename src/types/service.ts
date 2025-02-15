@@ -1,10 +1,10 @@
 export type ServiceType = 'REST' | 'HTTP'
 
 export interface Developer {
+  avatar: string
+  email: string
   id: string
   name: string
-  email: string
-  avatar: string
 }
 
 export interface ServiceVersion {
@@ -13,7 +13,7 @@ export interface ServiceVersion {
   name: string
   description: string
   /** Only present if the service is published */
-  developer?: Developer
+  developer: Developer
   updated_at: Date
 }
 
