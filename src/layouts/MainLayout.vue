@@ -2,16 +2,34 @@
   <div>
     <NavBar>
       <template #right>
-        <router-link to="/organization" class="item">
-          <img src="@/assets/icons/icon-org.svg" alt="Two people together as a group" />
+        <router-link
+          class="item"
+          to="/organization"
+        >
+          <img
+            alt="Two people together as a group"
+            src="@/assets/icons/icon-org.svg"
+          >
           <span>Organization</span>
         </router-link>
-        <router-link to="/settings" class="item">
-          <img src="@/assets/icons/icon-cog.svg" alt="A gear" />
+        <router-link
+          class="item"
+          to="/settings"
+        >
+          <img
+            alt="A gear"
+            src="@/assets/icons/icon-cog.svg"
+          >
           <span>Settings</span>
         </router-link>
-        <router-link to="/profile" class="item profile">
-          <img src="@/assets/icons/icon-user.svg" alt="A person" />
+        <router-link
+          class="item profile"
+          to="/profile"
+        >
+          <img
+            alt="A person"
+            src="@/assets/icons/icon-user.svg"
+          >
           <span>Profile</span>
         </router-link>
       </template>
@@ -24,26 +42,26 @@
 </template>
 
 <script setup lang="ts">
-import NavBar from '@/components/NavBar.vue';
+import NavBar from '@/components/NavBar.vue'
 </script>
 
 <style lang="scss" scoped>
 .main {
   background-color: #f8f8fa;
+  min-height: 100vh;
 
   /* Push content below the 70px navbar */
   padding-top: 70px;
-  min-height: 100vh;
 }
 
 :deep(.item) {
-  display: flex;
   align-items: center;
-  gap: 8px;
+  color: #fff;
+  display: flex;
   font-size: 15px;
   font-weight: 600;
+  gap: 8px;
   line-height: 18.15px;
-  color: #fff;
   text-decoration: none;
 }
 

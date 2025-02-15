@@ -1,5 +1,8 @@
 <template>
-  <section class="service-developers" v-if="developers && developers.length">
+  <section
+    v-if="developers && developers.length"
+    class="service-developers"
+  >
     <!-- If there are more than 2, show a circle indicating the remaining count -->
     <div
       v-if="developers.length > 2"
@@ -21,11 +24,14 @@
       <!-- If we have an avatar URL -->
       <img
         v-if="developer.avatar"
-        :src="developer.avatar"
         :alt="developer.name"
-      />
+        :src="developer.avatar"
+      >
       <!-- Otherwise, show initials -->
-      <span v-else class="service-developers__initials">
+      <span
+        v-else
+        class="service-developers__initials"
+      >
         {{ getInitials(developer.name) }}
       </span>
     </div>
@@ -33,50 +39,50 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, computed } from 'vue';
-import type { ServiceVersion, Developer } from '@/types';
+import { onMounted, ref, computed } from 'vue'
+import type { ServiceVersion, Developer } from '@/types'
 
 const props = defineProps<{
-  versions: ServiceVersion[];
-}>();
+  versions: ServiceVersion[]
+}>()
 
-const developers = ref<Developer[]>([]);
+const developers = ref<Developer[]>([])
 
 onMounted(() => {
-  const devs = props.versions.map(v => v.developer).filter(Boolean);
+  const devs = props.versions.map(v => v.developer).filter(Boolean)
   developers.value = Array.from(new Set(devs.map(d => d.id)))
-    .map(id => devs.find(d => d.id === id)!);
-});
+    .map(id => devs.find(d => d.id === id)!)
+})
 
 const visibleDevelopers = computed(() => {
-  return developers.value.length <= 2 ? developers.value : developers.value.slice(0, 2);
-});
+  return developers.value.length <= 2 ? developers.value : developers.value.slice(0, 2)
+})
 
 function getInitials(name: string): string {
-  const names = name.split(' ');
+  const names = name.split(' ')
 
   if (names.length === 1) {
-    return names[0].charAt(0);
+    return names[0].charAt(0)
   }
 
-  return names[0].charAt(0) + names[names.length - 1].charAt(0);
+  return names[0].charAt(0) + names[names.length - 1].charAt(0)
 }
 </script>
 
 <style lang="scss" scoped>
 .service-developers {
-  display: inline-flex;
   align-items: center;
+  display: inline-flex;
 
   &__avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    overflow: hidden;
-    background-color: #eee;
-    display: flex;
     align-items: center;
+    background-color: #eee;
+    border-radius: 50%;
+    display: flex;
+    height: 36px;
     justify-content: center;
+    overflow: hidden;
+    width: 36px;
 
     /* Overlap subsequent avatars with negative margin */
     & + .service-developers__avatar {
@@ -84,21 +90,21 @@ function getInitials(name: string): string {
     }
 
     img {
-      width: 100%;
       height: 100%;
       object-fit: cover;
+      width: 100%;
     }
   }
 
   &__initials {
-    font-size: 0.75rem;
     color: #333;
+    font-size: 0.75rem;
   }
 
   &__avatar--extra {
     background-color: #f1f1f8;
-    color: #777D8A;
     border: 2px solid #fff;
+    color: #777D8A;
     font-size: 12px;
     font-weight: 600;
     line-height: 24px;

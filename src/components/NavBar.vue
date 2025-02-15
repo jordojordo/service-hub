@@ -4,8 +4,14 @@
       <div
         class="app-navbar-logo"
       >
-        <router-link to="/" class="item">
-          <img src="@/assets/logo/konnect-header.svg" alt="Kong Konnect" />
+        <router-link
+          class="item"
+          to="/"
+        >
+          <img
+            alt="Kong Konnect"
+            src="@/assets/logo/konnect-header.svg"
+          >
         </router-link>
       </div>
       <div class="navbar-content">
@@ -26,11 +32,11 @@
 <style lang="scss" scoped>
 .navbar {
   background: linear-gradient(#09224F, #073382);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
   height: 70px;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
   z-index: 99;
 
   .header-content {
@@ -45,9 +51,9 @@
     display: flex;
     height: 100%;
     justify-content: flex-start;
-    margin-right: '32px';
-    max-width: 'calc(240px - 32px)';
-    min-width: 'calc(240px - 32px)';
+    margin-right: 32px;
+    max-width: calc(240px - 32px);
+    min-width: calc(240px - 32px);
     padding-left:  20px;
   }
 

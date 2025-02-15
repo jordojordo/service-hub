@@ -9,7 +9,10 @@
     <!-- Header: Status + Versions -->
     <header class="service-card__header">
       <div class="service-card__header-left">
-        <ServiceStatus :status="props.service.published" :loading="loading" />
+        <ServiceStatus
+          :loading="loading"
+          :status="props.service.published"
+        />
       </div>
       <div class="service-card__header-right">
         <ServiceVersions :versions="props.service.versions.length" />
@@ -18,14 +21,21 @@
 
     <!-- Main Content: Name + Description -->
     <main class="service-card__body">
-      <h2 class="service-card__title">{{ props.service.name }}</h2>
-      <p class="service-card__description">{{ props.service.description }}</p>
+      <h2 class="service-card__title">
+        {{ props.service.name }}
+      </h2>
+      <p class="service-card__description">
+        {{ props.service.description }}
+      </p>
     </main>
 
     <!-- Footer: Metrics + Developers -->
     <footer class="service-card__footer">
       <div class="service-card__footer-left">
-        <ServiceMetrics v-if="props.service.metrics" :metrics="props.service.metrics" />
+        <ServiceMetrics
+          v-if="props.service.metrics"
+          :metrics="props.service.metrics"
+        />
       </div>
       <div class="service-card__footer-right">
         <ServiceDevelopers :versions="props.service.versions" />
@@ -35,43 +45,42 @@
 </template>
 
 <script setup lang="ts">
-import type { Service } from '@/types';
+import type { Service } from '@/types'
 
-import ServiceStatus from '@/components/ServiceCard/ServiceStatus.vue';
-import ServiceVersions from '@/components/ServiceCard/ServiceVersions.vue';
-import ServiceMetrics from '@/components/ServiceCard/ServiceMetrics.vue';
-import ServiceDevelopers from '@/components/ServiceCard/ServiceDevelopers.vue';
+import ServiceStatus from '@/components/ServiceCard/ServiceStatus.vue'
+import ServiceVersions from '@/components/ServiceCard/ServiceVersions.vue'
+import ServiceMetrics from '@/components/ServiceCard/ServiceMetrics.vue'
+import ServiceDevelopers from '@/components/ServiceCard/ServiceDevelopers.vue'
 
 const props = defineProps<{
-  service: Service,
+  service: Service
   loading: boolean
-}>();
+}>()
 </script>
 
 <style lang="scss" scoped>
 .service-card {
-  width: 100%;
-  box-sizing: border-box;
   background-color: #fff;
   border-radius: 6px;
-  padding: 24px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  transition: box-shadow 0.2s ease-in-out;
-  width: 100%;
   height: 100%;
   justify-content: space-between;
+  padding: 24px;
+  transition: box-shadow 0.2s ease-in-out;
+  width: 100%;
 
   /* Header */
   &__header {
+    align-items: center;
     display: flex;
     justify-content: space-between;
-    align-items: center;
   }
   &__header-left,
   &__header-right {
-    display: flex;
     align-items: center;
+    display: flex;
   }
 
   /* Main Body */
@@ -79,31 +88,31 @@ const props = defineProps<{
     margin-top: 0.75rem;
   }
   &__title {
+    color: #3C4557;
     font-size: 20px;
     font-weight: 600;
     line-height: 24px;
     margin: 0;
-    color: #3C4557;
   }
   &__description {
+    color: #707888;
     font-size: 13px;
     font-weight: 400;
     line-height: 20px;
-    color: #707888;
   }
 
   /* Footer */
   &__footer {
-    margin-top: auto; /* push footer to the bottom if the card grows */
+    align-items: center;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    margin-top: auto; /* push footer to the bottom if the card grows */
     margin-top: 1rem;
   }
   &__footer-left,
   &__footer-right {
-    display: flex;
     align-items: center;
+    display: flex;
   }
 }
 

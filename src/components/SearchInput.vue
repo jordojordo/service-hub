@@ -1,41 +1,41 @@
 <template>
   <input
-    type="text"
+    class="search-input"
     :placeholder="props.placeholder"
+    type="text"
     :value="props.modelValue"
     @input="handleInput"
-    class="search-input"
-  />
+  >
 </template>
 
 <script setup lang="ts">
 const props = defineProps({
   modelValue: {
     type: String,
-    default: ''
+    default: '',
   },
   placeholder: {
     type: String,
-    default: 'Search services...'
-  }
-});
+    default: 'Search services...',
+  },
+})
 
-const emits = defineEmits(['update:modelValue']);
+const emits = defineEmits(['update:modelValue'])
 
 function handleInput(event: Event) {
-  const target = event.target as HTMLInputElement;
+  const target = event.target as HTMLInputElement
 
-  emits('update:modelValue', target.value);
+  emits('update:modelValue', target.value)
 }
 </script>
 
 <style scoped>
 .search-input {
-  padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 100%;
   box-sizing: border-box;
   font-size: 1rem;
+  padding: 8px 12px;
+  width: 100%;
 }
 </style>

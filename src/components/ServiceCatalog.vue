@@ -5,13 +5,16 @@
         <h1>Service Hub</h1>
         <p>
           Organize services, manage and track versioning and API service documentation.&nbsp;
-          <a href="google.com" target="_blank">Learn more</a>
+          <a
+            href="google.com"
+            target="_blank"
+          >Learn more</a>
         </p>
       </div>
       <div v-if="!loading">
         <SearchInput
-          data-testid="search-input"
           v-model="searchQuery"
+          data-testid="search-input"
           placeholder="Search services..."
         />
       </div>
@@ -20,16 +23,25 @@
       Loading services...
     </div>
     <div v-else>
-      <ul v-if="filteredServices.length" class="catalog">
+      <ul
+        v-if="filteredServices.length"
+        class="catalog"
+      >
         <li
           v-for="service in filteredServices"
           :key="service.id"
           class="service"
         >
-          <ServiceCard :service="service" :loading="loading" />
+          <ServiceCard
+            :loading="loading"
+            :service="service"
+          />
         </li>
       </ul>
-      <div v-else data-testid="no-results">
+      <div
+        v-else
+        data-testid="no-results"
+      >
         No services
       </div>
     </div>
@@ -37,24 +49,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed } from 'vue'
 
-import useServices from '@/composables/useServices';
-import ServiceCard from '@/components/ServiceCard/ServiceCard.vue';
-import SearchInput from '@/components/SearchInput.vue';
+import useServices from '@/composables/useServices'
+import ServiceCard from '@/components/ServiceCard/ServiceCard.vue'
+import SearchInput from '@/components/SearchInput.vue'
 
-const { services, loading } = useServices();
-const searchQuery = ref('');
+const { services, loading } = useServices()
+const searchQuery = ref('')
 
 const filteredServices = computed(() => {
   if (!searchQuery.value.trim()) {
-    return services.value;
+    return services.value
   };
 
   return services.value.filter(service =>
-    service.name.toLowerCase().includes(searchQuery.value.toLowerCase())
-  );
-});
+    service.name.toLowerCase().includes(searchQuery.value.toLowerCase()),
+  )
+})
 </script>
 
 <style lang="scss" scoped>
@@ -64,24 +76,24 @@ const filteredServices = computed(() => {
   padding: 0 20px;
 
   &__masthead {
+    align-items: flex-start;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
     margin-bottom: 2rem;
 
     h1 {
-      margin: 0;
+      color: #3C4557;
       font-size: 32px;
       font-weight: 700;
       line-height: 36px;
-      color: #3C4557;
+      margin: 0;
     }
 
     p {
-      font-size: 16px;
-      line-height: 24px;
-      font-weight: 400;
       color: #3C4557;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
     }
 
     a {
@@ -92,8 +104,8 @@ const filteredServices = computed(() => {
 
 .catalog {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 40px;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   list-style: none;
   margin: 2rem 0 0;
   padding: 0;
