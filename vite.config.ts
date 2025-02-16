@@ -17,6 +17,11 @@ export default defineConfig({
   },
   css: {
     devSourcemap: true,
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler', // API used for sass: See reference https://vite.dev/config/shared-options#css-preprocessoroptions
+      },
+    },
   },
   server: {
     open: true,
