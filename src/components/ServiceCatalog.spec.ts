@@ -1,5 +1,7 @@
 import { vi, describe, it, expect } from 'vitest'
+import { createPinia } from 'pinia'
 import { mount } from '@vue/test-utils'
+
 import ServiceCatalog from './ServiceCatalog.vue'
 import servicesData from '../../mocks/services'
 
@@ -26,7 +28,7 @@ vi.mock('axios', async () => {
 describe('ServiceCatalog', () => {
   it('shows the search input', async () => {
     // No `mockedResponses` modification needed; just use the default mocked response
-    const wrapper = mount(ServiceCatalog)
+    const wrapper = mount(ServiceCatalog, { global: { plugins: [createPinia()] } })
 
     expect(wrapper.findTestId('search-input').isVisible()).toBe(true)
   })
@@ -37,7 +39,7 @@ describe('ServiceCatalog', () => {
       data: [],
     })
 
-    const wrapper = mount(ServiceCatalog)
+    const wrapper = mount(ServiceCatalog, { global: { plugins: [createPinia()] } })
 
     expect(wrapper.findTestId('no-results').isVisible()).toBe(true)
   })
