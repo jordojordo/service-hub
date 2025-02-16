@@ -35,6 +35,7 @@
           <ServiceCard
             :loading="loading"
             :service="service"
+            @click-service="onServiceClicked"
           />
         </li>
       </ul>
@@ -60,16 +61,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, markRaw } from 'vue'
 
+import type { Service } from '@/types'
+
+import { useModalStore } from '@/stores/modal'
 import { debounce } from '@/utils/debounce'
 import useServices from '@/composables/useServices'
 
 import ServiceCard from '@/components/ServiceCard/ServiceCard.vue'
 import SearchInput from '@/components/SearchInput.vue'
 import Pagination from '@/components/PaginationNav.vue'
+import ServiceDetail from '@/components/ServiceDetail.vue'
 
 const { services, loading } = useServices()
+const modalStore = useModalStore()
 
 const searchQuery = ref('')
 const debouncedSearchQuery = ref(searchQuery.value)
@@ -79,10 +85,6 @@ const pageSize = 9
 const updateDebouncedSearchQuery = debounce((val: string) => {
   debouncedSearchQuery.value = val
 }, 300)
-
-watch(searchQuery, (neuQuery) => {
-  updateDebouncedSearchQuery(neuQuery)
-})
 
 // Filter the services based on the debounced query.
 const filteredServices = computed(() => {
@@ -96,17 +98,28 @@ const filteredServices = computed(() => {
   )
 })
 
-// Whenever the filtered list changes, reset currentPage to 1
-watch(filteredServices, () => {
-  currentPage.value = 1
-})
-
 // Slice the filtered array to show only the services for the current page
 const paginatedServices = computed(() => {
   const start = (currentPage.value - 1) * pageSize
   const end = start + pageSize
 
   return filteredServices.value.slice(start, end)
+})
+
+function onServiceClicked(service: Service) {
+  modalStore.openModal({
+    component: markRaw(ServiceDetail),
+    componentProps: { service },
+  })
+}
+
+watch(searchQuery, (neuQuery) => {
+  updateDebouncedSearchQuery(neuQuery)
+})
+
+// Whenever the filtered list changes, reset currentPage to 1
+watch(filteredServices, () => {
+  currentPage.value = 1
 })
 </script>
 
