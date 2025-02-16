@@ -24,11 +24,11 @@
     </div>
     <div v-else>
       <ul
-        v-if="filteredServices.length"
+        v-if="paginatedServices.length"
         class="catalog"
       >
         <li
-          v-for="service in filteredServices"
+          v-for="service in paginatedServices"
           :key="service.id"
           class="service"
         >
@@ -44,6 +44,17 @@
       >
         No services
       </div>
+
+      <div
+        v-if="filteredServices.length"
+        class="pagination-container"
+      >
+        <Pagination
+          v-model="currentPage"
+          :page-size="pageSize"
+          :total-items="filteredServices.length"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -53,13 +64,17 @@ import { ref, computed, watch } from 'vue'
 
 import { debounce } from '@/utils/debounce'
 import useServices from '@/composables/useServices'
+
 import ServiceCard from '@/components/ServiceCard/ServiceCard.vue'
 import SearchInput from '@/components/SearchInput.vue'
+import Pagination from '@/components/PaginationNav.vue'
 
 const { services, loading } = useServices()
-const searchQuery = ref('')
 
+const searchQuery = ref('')
 const debouncedSearchQuery = ref(searchQuery.value)
+const currentPage = ref(1)
+const pageSize = 9
 
 const updateDebouncedSearchQuery = debounce((val: string) => {
   debouncedSearchQuery.value = val
@@ -79,6 +94,19 @@ const filteredServices = computed(() => {
     service.description.toLowerCase().includes(query) ||
     service.type.toLowerCase().includes(query),
   )
+})
+
+// Whenever the filtered list changes, reset currentPage to 1
+watch(filteredServices, () => {
+  currentPage.value = 1
+})
+
+// Slice the filtered array to show only the services for the current page
+const paginatedServices = computed(() => {
+  const start = (currentPage.value - 1) * pageSize
+  const end = start + pageSize
+
+  return filteredServices.value.slice(start, end)
 })
 </script>
 
@@ -124,4 +152,9 @@ const filteredServices = computed(() => {
   padding: 0;
 }
 
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem auto 0;
+}
 </style>
