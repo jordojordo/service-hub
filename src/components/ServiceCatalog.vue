@@ -49,8 +49,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 
+import { debounce } from '@/utils/debounce';
 import useServices from '@/composables/useServices'
 import ServiceCard from '@/components/ServiceCard/ServiceCard.vue'
 import SearchInput from '@/components/SearchInput.vue'
@@ -58,13 +59,25 @@ import SearchInput from '@/components/SearchInput.vue'
 const { services, loading } = useServices()
 const searchQuery = ref('')
 
+const debouncedSearchQuery = ref(searchQuery.value)
+
+const updateDebouncedSearchQuery = debounce((val: string) => {
+  debouncedSearchQuery.value = val
+}, 300)
+
+watch(searchQuery, (neuQuery) => {
+  updateDebouncedSearchQuery(neuQuery)
+})
+
+// Filter the services based on the debounced query.
 const filteredServices = computed(() => {
-  if (!searchQuery.value.trim()) {
-    return services.value
-  };
+  const query = debouncedSearchQuery.value.trim().toLowerCase()
+  if (!query) return services.value
 
   return services.value.filter(service =>
-    service.name.toLowerCase().includes(searchQuery.value.toLowerCase()),
+    service.name.toLowerCase().includes(query) ||
+    service.description.toLowerCase().includes(query) ||
+    service.type.toLowerCase().includes(query)
   )
 })
 </script>
