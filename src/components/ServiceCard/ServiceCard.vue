@@ -5,6 +5,7 @@
       'service-card--published': props.service.published,
       'service-card--unpublished': !props.service.published,
     }"
+    @click="onCardClick"
   >
     <!-- Header: Status + Versions -->
     <header class="service-card__header">
@@ -56,6 +57,12 @@ const props = defineProps<{
   service: Service
   loading: boolean
 }>()
+
+const emits = defineEmits(['clickService'])
+
+function onCardClick() {
+  emits('clickService', props.service)
+}
 </script>
 
 <style lang="scss" scoped>

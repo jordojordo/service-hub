@@ -35,6 +35,8 @@
       </template>
     </NavBar>
 
+    <GlobalModal />
+
     <main class="main">
       <router-view />
     </main>
@@ -43,6 +45,7 @@
 
 <script setup lang="ts">
 import NavBar from '@/components/NavBar.vue'
+import GlobalModal from '@/components/GlobalModal/GlobalModal.vue'
 </script>
 
 <style lang="scss" scoped>
