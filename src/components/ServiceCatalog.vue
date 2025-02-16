@@ -51,7 +51,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 
-import { debounce } from '@/utils/debounce';
+import { debounce } from '@/utils/debounce'
 import useServices from '@/composables/useServices'
 import ServiceCard from '@/components/ServiceCard/ServiceCard.vue'
 import SearchInput from '@/components/SearchInput.vue'
@@ -77,7 +77,7 @@ const filteredServices = computed(() => {
   return services.value.filter(service =>
     service.name.toLowerCase().includes(query) ||
     service.description.toLowerCase().includes(query) ||
-    service.type.toLowerCase().includes(query)
+    service.type.toLowerCase().includes(query),
   )
 })
 </script>
