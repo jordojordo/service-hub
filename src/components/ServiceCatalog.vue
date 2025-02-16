@@ -11,12 +11,16 @@
           >Learn more</a>
         </p>
       </div>
-      <div v-if="!loading">
+      <div
+        v-if="!loading"
+        class="service-catalog__actions"
+      >
         <SearchInput
           v-model="searchQuery"
           data-testid="search-input"
-          placeholder="Search services..."
+          placeholder="Search"
         />
+        <ServiceCreateButton @service-created="onServiceCreated" />
       </div>
     </div>
     <div v-if="loading">
@@ -71,6 +75,7 @@ import useServices from '@/composables/useServices'
 
 import ServiceCard from '@/components/ServiceCard/ServiceCard.vue'
 import SearchInput from '@/components/SearchInput.vue'
+import ServiceCreateButton from '@/components/ServiceCreateButton.vue'
 import Pagination from '@/components/PaginationNav.vue'
 import ServiceDetail from '@/components/ServiceDetail.vue'
 
@@ -89,7 +94,10 @@ const updateDebouncedSearchQuery = debounce((val: string) => {
 // Filter the services based on the debounced query.
 const filteredServices = computed(() => {
   const query = debouncedSearchQuery.value.trim().toLowerCase()
-  if (!query) return services.value
+
+  if (!query) {
+    return services.value
+  }
 
   return services.value.filter(service =>
     service.name.toLowerCase().includes(query) ||
@@ -111,6 +119,10 @@ function onServiceClicked(service: Service) {
     component: markRaw(ServiceDetail),
     componentProps: { service },
   })
+}
+
+function onServiceCreated() {
+  modalStore.closeModal()
 }
 
 watch(searchQuery, (neuQuery) => {
@@ -153,6 +165,11 @@ watch(filteredServices, () => {
     a {
       color: #1354c6;
     }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 24px;
   }
 }
 
