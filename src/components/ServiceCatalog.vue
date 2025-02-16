@@ -11,7 +11,10 @@
           >Learn more</a>
         </p>
       </div>
-      <div v-if="!loading" class="service-catalog__actions">
+      <div
+        v-if="!loading"
+        class="service-catalog__actions"
+      >
         <SearchInput
           v-model="searchQuery"
           data-testid="search-input"

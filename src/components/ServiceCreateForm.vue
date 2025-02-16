@@ -20,7 +20,10 @@ const props = defineProps<{ onServiceCreated?: () => void }>()
 
 function onCreateService() {
   alert('Service created!')
-  props.onServiceCreated && props.onServiceCreated()
+
+  if (props.onServiceCreated) {
+    props.onServiceCreated()
+  }
 }
 </script>
 

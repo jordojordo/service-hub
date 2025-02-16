@@ -3,7 +3,10 @@
     class="service-create-button"
     @click="onCreateService"
   >
-    <img src="@/assets/icons/icon-plus.svg" alt="Plus sign" />
+    <img
+      alt="Plus sign"
+      src="@/assets/icons/icon-plus.svg"
+    >
     <span>Service Package</span>
   </button>
 </template>
@@ -13,12 +16,12 @@ import { markRaw } from 'vue'
 
 import { useModalStore } from '@/stores/modal'
 
-import ServiceCreateForm from '@/components/ServiceCreateForm.vue';
+import ServiceCreateForm from '@/components/ServiceCreateForm.vue'
 
 const modalStore = useModalStore()
 
 const emits = defineEmits<{
-  (event: 'serviceCreated'): void;
+  (event: 'serviceCreated'): void
 }>()
 
 const onCreateService = () => {
@@ -36,24 +39,24 @@ const onCreateService = () => {
 
 <style lang="scss" scoped>
 .service-create-button {
-  display: flex;
   align-items: center;
-  justify-content: center;
   background-color: #07A88D;
   border: none;
   border-radius: 100px;
-  gap: 8px;
   color: white;
   cursor: pointer;
-  width: 197px;
+  display: flex;
+  gap: 8px;
   height: 44px;
+  justify-content: center;
   padding: 12px 24px 12px 16px;
   transition: background-color 0.1s;
+  width: 197px;
 
   & span {
-    min-width: 129px;
     font-size: 16px;
     font-weight: 600;
+    min-width: 129px;
   }
 }
 </style>

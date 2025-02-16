@@ -1,13 +1,17 @@
 <template>
   <div class="search-input__wrapper">
-    <img class="search-input__icon" src="@/assets/icons/icon-search.svg" alt="Magnifying glass">
+    <img
+      alt="Magnifying glass"
+      class="search-input__icon"
+      src="@/assets/icons/icon-search.svg"
+    >
     <input
       class="search-input"
+      :placeholder="props.placeholder"
       type="text"
       :value="props.modelValue"
-      :placeholder="props.placeholder"
       @input="handleInput"
-    />
+    >
   </div>
 </template>
 
@@ -34,36 +38,36 @@ function handleInput(event: Event) {
 
 <style lang="scss" scoped>
 .search-input {
-  width: 100%;
-  padding: 10px 16px 10px 40px;
-  font-size: 1rem;
   border: 1px solid #E7E7EC;
   border-radius: 4px;
   box-sizing: border-box;
+  color: #6F7787;
+  font-size: 1rem;
   font-size: 14px;
   font-weight: 400;
   line-height: 24px;
-  color: #6F7787;
+  padding: 10px 16px 10px 40px;
+  width: 100%;
 
   &__wrapper {
+    height: 44px;
     position: relative;
     width: 209px;
-    height: 44px;
   }
 
   &__icon {
-    position: absolute;
+    height: 16px;
     left: 12px;
+    pointer-events: none;
+    position: absolute;
     top: 50%;
     transform: translateY(-50%);
     width: 16px;
-    height: 16px;
-    pointer-events: none;
   }
 
   &:focus {
-    outline: none;
     border-color: #3C4557;
+    outline: none;
   }
 }
 </style>
