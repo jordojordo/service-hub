@@ -1,9 +1,21 @@
 <template>
   <div>
     <NavBar>
+      <template #left>
+        <router-link
+          class="navbar__logo"
+          to="/"
+        >
+          <img
+            alt="Kong Konnect"
+            src="@/assets/logo/konnect-header.svg"
+          >
+        </router-link>
+      </template>
+
       <template #right>
         <router-link
-          class="item"
+          class="navbar__item"
           to="/organization"
         >
           <img
@@ -13,7 +25,7 @@
           <span>Organization</span>
         </router-link>
         <router-link
-          class="item"
+          class="navbar__item"
           to="/settings"
         >
           <img
@@ -23,7 +35,7 @@
           <span>Settings</span>
         </router-link>
         <router-link
-          class="item profile"
+          class="navbar__item profile"
           to="/profile"
         >
           <img
@@ -57,18 +69,32 @@ import GlobalModal from '@/components/GlobalModal/GlobalModal.vue'
   padding-top: 70px;
 }
 
-:deep(.item) {
-  align-items: center;
-  color: #fff;
-  display: flex;
-  font-size: 15px;
-  font-weight: 600;
-  gap: 8px;
-  line-height: 18.15px;
-  text-decoration: none;
-}
+.navbar {
+  &___logo {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: flex-start;
+    margin-right: 32px;
+    max-width: calc(240px - 32px);
+    min-width: calc(240px - 32px);
+  }
 
-:deep(.profile) {
-  background-color: #072863;
+  &__item {
+    align-items: center;
+    color: #fff;
+    display: flex;
+    font-size: 15px;
+    font-weight: 600;
+    gap: 8px;
+    line-height: 18.15px;
+    text-decoration: none;
+  }
+
+  &__item.profile {
+    background-color: #072863;
+    border-radius: 20px;
+    padding: 0 12px;
+  }
 }
 </style>
