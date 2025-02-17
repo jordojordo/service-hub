@@ -22,14 +22,13 @@ const props = defineProps<{
     border-radius: 100px;
     color: #5888DB;
     display: flex;
-    font-size: 1rem;
     font-size: 13px;
     font-weight: 600;
     gap: 8px;
     height: 33px;
     justify-content: center;
     line-height: 15.73px;
-    width: 97px;
+    width: 88px;
   }
 }
 </style>

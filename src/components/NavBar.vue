@@ -28,7 +28,6 @@
     align-items: center;
     display: flex;
     height: 100%;
-    padding: 0 20px;
     width: 100%;
 
     &__left,

@@ -15,7 +15,7 @@ html {
 
 body {
   background-color: #f8f8fa;
-  font-family: Arial, sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 1.6rem;
   font-weight: 400;
   line-height: 1.2;

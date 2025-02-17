@@ -80,7 +80,9 @@ function formatAsPercentage(num: number): string {
 
   /* Each li has a pseudo-element for the colored dot */
   &__wrapper li {
-    padding-left: 1rem;
+    align-items: center;
+    display: flex;
+    padding-left: 15px;
     position: relative;
   }
   &__wrapper li::before {

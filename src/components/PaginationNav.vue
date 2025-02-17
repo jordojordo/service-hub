@@ -92,6 +92,7 @@ function goToPage(page: number) {
 
   &__button {
     align-items: center;
+    background-color: #f8fafc;
     border: 1px solid #A6C6FF;
     border-radius: 50%;
     color: #1456CB;
@@ -104,10 +105,6 @@ function goToPage(page: number) {
     padding: 0;
     vertical-align: middle;
     width: 44px;
-
-    &:hover:not(:disabled) {
-      background-color: #f8fafc;
-    }
 
     &:disabled {
       border: 1px solid #0000001A;

@@ -73,12 +73,14 @@ function onCardClick() {
   display: flex;
   flex-direction: column;
   height: 100%;
-  justify-content: space-between;
   padding: 24px;
   transition: box-shadow 0.2s ease-in-out;
   width: 100%;
 
-  /* Header */
+  @media (max-width: 768px) {
+    padding: 4px;
+  }
+
   &__header {
     align-items: center;
     display: flex;
@@ -88,9 +90,9 @@ function onCardClick() {
   &__header-right {
     align-items: center;
     display: flex;
+    min-height: 33px;
   }
 
-  /* Main Body */
   &__body {
     margin-top: 0.75rem;
   }
@@ -108,13 +110,12 @@ function onCardClick() {
     line-height: 20px;
   }
 
-  /* Footer */
   &__footer {
     align-items: center;
     display: flex;
     justify-content: space-between;
-    margin-top: auto; /* push footer to the bottom if the card grows */
-    margin-top: 1rem;
+    margin-top: auto;
+    min-height: 48px;
   }
   &__footer-left,
   &__footer-right {
