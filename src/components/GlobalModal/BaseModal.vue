@@ -50,14 +50,19 @@ function close() {
 
 .modal-container {
   background-color: #fff;
-  border-radius: 8px;
+  border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  gap: 10px;
   max-height: 80vh;
   max-width: 830px;
   overflow-y: auto;
-  padding: 1rem;
+  padding: 32px;
   position: relative;
   width: 100%;
+
+  @media (max-width: 768px) {
+    padding: 2px;
+  }
 }
 
 .modal-header {

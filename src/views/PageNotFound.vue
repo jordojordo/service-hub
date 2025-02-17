@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <h1>Page not found</h1>
     <p>Sorry, the page you are looking for does not exist.</p>
     <router-link to="/">
@@ -9,6 +9,26 @@
 </template>
 
 <style scoped>
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+  justify-content: center;
+  left: 20px;
+  margin: 0 auto;
+  padding: 40px;
+  position: relative;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .container {
+    left: 0;
+  }
+}
+
 h1 {
   color: #3C4557;
   font-size: 32px;

@@ -14,26 +14,28 @@
       </template>
 
       <template #right>
-        <router-link
-          class="navbar__item"
-          to="/organization"
-        >
-          <img
-            alt="Two people together as a group"
-            src="@/assets/icons/icon-org.svg"
+        <div class="navbar__links-wrapper">
+          <router-link
+            class="navbar__item organization"
+            to="/organization"
           >
-          <span>Organization</span>
-        </router-link>
-        <router-link
-          class="navbar__item"
-          to="/settings"
-        >
-          <img
-            alt="A gear"
-            src="@/assets/icons/icon-cog.svg"
+            <img
+              alt="Two people together as a group"
+              src="@/assets/icons/icon-org.svg"
+            >
+            <span>Organization</span>
+          </router-link>
+          <router-link
+            class="navbar__item settings"
+            to="/settings"
           >
-          <span>Settings</span>
-        </router-link>
+            <img
+              alt="A gear"
+              src="@/assets/icons/icon-cog.svg"
+            >
+            <span>Settings</span>
+          </router-link>
+        </div>
         <router-link
           class="navbar__item profile"
           to="/profile"
@@ -42,7 +44,8 @@
             alt="A person"
             src="@/assets/icons/icon-user.svg"
           >
-          <span>Profile</span>
+          <!-- Hardcoded for now... -->
+          <span>Katherine Ellis</span>
         </router-link>
       </template>
     </NavBar>
@@ -63,21 +66,65 @@ import GlobalModal from '@/components/GlobalModal/GlobalModal.vue'
 <style lang="scss" scoped>
 .main {
   background-color: #f8f8fa;
+  gap: 24px;
+  left: -20px;
   min-height: 100vh;
+  padding: 40px;
 
   /* Push content below the 70px navbar */
-  padding-top: 70px;
+  top: 83px;
+
+  @media (max-width: 768px) {
+    left: 0px;
+    padding: 0px;
+  }
 }
 
 .navbar {
-  &___logo {
+  &__logo {
     align-items: center;
     display: flex;
-    height: 100%;
+    height: 25.48px;
     justify-content: flex-start;
-    margin-right: 32px;
-    max-width: calc(240px - 32px);
-    min-width: calc(240px - 32px);
+    padding-left: 18px;
+  }
+
+  &__links-wrapper {
+    display: flex;
+    gap: 8px;
+    height: 44px;
+    max-width: 263px;
+
+    & > .organization, & > .settings {
+      border-radius: 0 24px 24px 0;
+      gap: 12px;
+      opacity: 80%;
+      padding: 18px 0px 18px 12px;
+
+      & > img {
+        width: 20px;
+      }
+
+      & > span {
+        @media (max-width: 768px) {
+          display: none;
+        }
+      }
+    }
+
+    & > .organization {
+      width: 144px;
+    }
+
+    & > .settings {
+      width: 111px;
+    }
+
+    @media (max-width: 768px) {
+      & > .organization, & > .settings {
+        width: 20px;
+      }
+    }
   }
 
   &__item {
@@ -89,12 +136,37 @@ import GlobalModal from '@/components/GlobalModal/GlobalModal.vue'
     gap: 8px;
     line-height: 18.15px;
     text-decoration: none;
-  }
 
-  &__item.profile {
-    background-color: #072863;
-    border-radius: 20px;
-    padding: 0 12px;
+    &.profile {
+      align-items: center;
+      background-color: #072863;
+      display: flex;
+      gap: 16px;
+      height: 100%;
+      justify-content: center;
+      width: 188px;
+
+      @media (max-width: 768px) {
+        width: 44px;
+      }
+
+      & > img {
+        border-radius: 30px;
+        height: 30px;
+        width: 30px;
+      }
+
+      & > span {
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 18.15px;
+        opacity: 80%;
+
+        @media (max-width: 768px) {
+          display: none;
+        }
+      }
+    }
   }
 }
 </style>

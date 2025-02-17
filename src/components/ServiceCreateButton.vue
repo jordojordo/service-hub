@@ -53,10 +53,20 @@ const onCreateService = () => {
   transition: background-color 0.1s;
   width: 197px;
 
+  @media (max-width: 768px) {
+    padding: 0;
+    width: 44px;
+  }
+
   & span {
+    font-family: 'Headline/H3', 'Inter', sans-serif;
     font-size: 16px;
     font-weight: 600;
     min-width: 129px;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 }
 </style>

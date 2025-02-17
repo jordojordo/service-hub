@@ -41,8 +41,6 @@ function handleInput(event: Event) {
   border: 1px solid #E7E7EC;
   border-radius: 4px;
   box-sizing: border-box;
-  color: #6F7787;
-  font-size: 1rem;
   font-size: 14px;
   font-weight: 400;
   line-height: 24px;
@@ -53,16 +51,21 @@ function handleInput(event: Event) {
     height: 44px;
     position: relative;
     width: 209px;
+
+    @media (max-width: 768px) {
+      max-width: 300px;
+      width: 70%;
+    }
   }
 
   &__icon {
-    height: 16px;
-    left: 12px;
+    height: 20px;
+    left: 8px;
     pointer-events: none;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 16px;
+    width: 20px;
   }
 
   &:focus {
