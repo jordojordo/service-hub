@@ -1,3 +1,40 @@
+# Design Considerations and Submission Notes
+
+## Workflow & Process
+
+- **Issue Tracking**: I created [issues](https://github.com/jordojordo/service-hub/issues?q=is%3Aissue%20state%3Aclosed) to track workflow and progress, which allowed me to break down the [project](https://github.com/users/jordojordo/projects/1) into manageable tasks.
+- **Project Board**: A [GitHub project board](https://github.com/users/jordojordo/projects/1) was set up to visually manage and track the status of each task throughout the development process.
+- **Pull Requests**: For each issue, a [dedicated pull request](https://github.com/jordojordo/service-hub/pulls?q=is%3Apr+is%3Aclosed) was created. This ensured that tests and builds passed before merging, and it also provided a clear history for others to review or contribute.
+
+## UI Focus & Implementation
+
+- **UI Emphasis**: As discussed during the Panel 1 interview, my main focus was on the UI. I paid particular attention to aligning with the Figma mock and ensuring responsiveness and pixel-perfect details.
+- **Componentization & Testing**: Efforts were made to create modular components (e.g., `ServiceCatalog`, `Modal`, etc.) with associated unit and component tests to ensure reliability and maintainability.
+
+## Server & Type Safety
+
+- **Minimal Server Changes**: I performed a small refactoring on the server to improve type safety. The focus was to ensure that the typing was more robust, while the server functionality was largely left intact.
+
+## Assumptions & Trade-offs
+
+- **Assumptions**:
+  - The primary goal was to deliver a solid UI experience, given the focus area in our discussion.
+  - The server was assumed to be reliable, so only minimal adjustments were necessary.
+- **Trade-offs**:
+  - In the interest of time, some features (e.g., complete test coverage across all components) were scoped down to cover key elements like the `ServiceCatalog`.
+  - For the Service Package creation, a simplified placeholder implementation was provided rather than a fully-fledged solution.
+  - Certain libraries (e.g., for SVG loading or date formatting) were avoided in favor of in-lined implementations to minimize dependencies and streamline the code.
+
+## Submission Process
+
+- **Commit Log**: The commit history is structured with conventional commit messages to clearly communicate the changes made for each task.
+- **Pull Request Documentation**: Each PR includes a detailed body that outlines the fixes, enhancements, and any related design decisions.
+- **Testing & Build**: Every commit and pull request underwent rigorous testing and build checks to ensure code quality and maintainability.
+
+Feel free to reach out if there are any questions or if further clarification is needed.
+
+---
+
 # Welcome
 
 Please take the time to read through all of the sections below; we want you to do great! :rocket:
